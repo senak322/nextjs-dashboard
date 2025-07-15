@@ -8,7 +8,9 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 const FormSchema = z.object({
   id: z.string(),
-  customerId: z.string(),
+  customerId: z.string({
+    invalid_type_error: 'Please select a customer.',
+  }),
   amount: z.coerce.number(),
   status: z.enum(['pending', 'paid']),
   date: z.string(),
